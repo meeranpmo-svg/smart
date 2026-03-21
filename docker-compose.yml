@@ -1,0 +1,8 @@
+services:
+  smartedit:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      # Live sync: any change to SmartEdit.html reflects instantly without rebuild
+      - ./SmartEdit.html:/usr/share/nginx/html/index.html:ro
