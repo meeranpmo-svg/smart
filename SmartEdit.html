@@ -21,13 +21,15 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:v
 /* Header */
 .hdr{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:58px;
   background:linear-gradient(180deg,#1a1a2e 0%,#12121f 100%);border-bottom:1px solid rgba(124,106,247,.2);flex-shrink:0;gap:12px;box-shadow:0 2px 20px rgba(0,0,0,.4)}
-.logo{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-wrap{display:flex;flex-direction:column;line-height:1.1}
 .logo-ic{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#7c6af7,#a855f7,#6366f1);
   display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 2px 12px rgba(124,106,247,.4);animation:logoPulse 3s ease-in-out infinite}
 @keyframes logoPulse{0%,100%{box-shadow:0 2px 12px rgba(124,106,247,.4)}50%{box-shadow:0 2px 20px rgba(124,106,247,.7)}}
 .logo-tx{font-size:17px;font-weight:800;letter-spacing:-.3px}
-.logo-tx span{background:linear-gradient(135deg,#7c6af7,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.logo-sub{font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;font-weight:500;margin-top:-1px}
+.logo-tx .ss{background:linear-gradient(135deg,#7c6af7,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo-tx .one{color:#f59e0b;font-weight:800}
+.logo-sub{font-size:8px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-top:1px;opacity:.85}
 .mode-tabs{display:flex;gap:3px;background:rgba(30,30,30,.8);padding:4px;border-radius:10px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.05)}
 .mt{padding:6px 15px;border-radius:7px;border:none;cursor:pointer;font-size:12px;font-weight:600;
   color:var(--muted);background:transparent;transition:all .2s;white-space:nowrap}
@@ -2552,8 +2554,10 @@ function App(){
       <header className="hdr">
         <div className="logo">
           <div className="logo-ic">⛡</div>
-          <div className="logo-tx">Smart <span>Shield One</span></div>
-          <div className="logo-sub">Digital Marketing Platform</div>
+          <div className="logo-wrap">
+            <div className="logo-tx"><span className="ss">Smart Shield</span> <span className="one">One</span></div>
+            <div className="logo-sub">Digital Marketing Platform</div>
+          </div>
         </div>
         <div className="mode-tabs">
           <button className={`mt ${mode==='photo'?'on':''}`} onClick={()=>setMode('photo')}>🖼 Photo</button>
