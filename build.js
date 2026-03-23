@@ -29,4 +29,5 @@ const compiled = noBabel.replace(
 );
 
 fs.writeFileSync('SmartEdit.compiled.html', compiled);
-console.log('✅ Done! Open SmartEdit.compiled.html — loads instantly!');
+fs.writeFileSync('index.html', compiled); // Vercel serves index.html
+console.log('✅ Done! SmartEdit.compiled.html + index.html updated — Vercel ready!');
