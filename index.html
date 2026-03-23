@@ -10,9 +10,9 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0d0d0d;--surface:#161616;--panel:#1e1e1e;--panel2:#272727;
-  --border:#2e2e2e;--accent:#7c6af7;--accent-h:#9b8cfb;--accent-dim:rgba(124,106,247,.15);
-  --text:#e8e8e8;--muted:#888;--dim:#555;--red:#ef4444;--green:#22c55e;--orange:#f97316;
+  --bg:#101e2e;--surface:#152838;--panel:#1a3248;--panel2:#203a52;
+  --border:#2e5570;--accent:#2bb5a0;--accent-h:#4dd8c4;--accent-dim:rgba(43,181,160,.15);
+  --text:#f0f5f4;--muted:#8ab0b8;--dim:#5a8090;--red:#ef4444;--green:#22c55e;--orange:#f97316;
   --r:10px;--rs:6px;
 }
 body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden}
@@ -20,26 +20,27 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:v
 
 /* Header */
 .hdr{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:58px;
-  background:linear-gradient(180deg,#1a1a2e 0%,#12121f 100%);border-bottom:1px solid rgba(124,106,247,.2);flex-shrink:0;gap:12px;box-shadow:0 2px 20px rgba(0,0,0,.4)}
+  background:linear-gradient(180deg,#132d40 0%,#0e2233 100%);border-bottom:1px solid rgba(43,181,160,.25);flex-shrink:0;gap:12px;box-shadow:0 2px 20px rgba(0,0,0,.4)}
 .logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .logo-wrap{display:flex;flex-direction:column;line-height:1.1}
-.logo-ic{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#7c6af7,#a855f7,#6366f1);
-  display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 2px 12px rgba(124,106,247,.4);animation:logoPulse 3s ease-in-out infinite}
-@keyframes logoPulse{0%,100%{box-shadow:0 2px 12px rgba(124,106,247,.4)}50%{box-shadow:0 2px 20px rgba(124,106,247,.7)}}
+.logo-ic{width:38px;height:38px;border-radius:10px;background:transparent;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-ic svg{width:38px;height:42px;filter:drop-shadow(0 2px 10px rgba(56,201,176,.6));animation:logoPulse 3s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{filter:drop-shadow(0 2px 10px rgba(56,201,176,.5))}50%{filter:drop-shadow(0 4px 20px rgba(56,201,176,.8))}}
 .logo-tx{font-size:17px;font-weight:800;letter-spacing:-.3px}
-.logo-tx .ss{background:linear-gradient(135deg,#7c6af7,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.logo-tx .one{color:#f59e0b;font-weight:800}
-.logo-sub{font-size:8px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-top:1px;opacity:.85}
+.logo-tx .ss{background:linear-gradient(135deg,#3a8ab0,#4dd8c4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo-tx .one{color:#4dd8c4;font-weight:800}
+.logo-sub{font-size:8px;color:#38c9b0;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-top:1px;opacity:.9}
 .mode-tabs{display:flex;gap:3px;background:rgba(30,30,30,.8);padding:4px;border-radius:10px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.05)}
 .mt{padding:6px 15px;border-radius:7px;border:none;cursor:pointer;font-size:12px;font-weight:600;
   color:var(--muted);background:transparent;transition:all .2s;white-space:nowrap}
 .mt:hover{color:var(--text)}
-.mt.on{background:linear-gradient(135deg,#7c6af7,#6366f1);color:#fff;box-shadow:0 2px 10px rgba(124,106,247,.35)}
+.mt.on{background:linear-gradient(135deg,#2bb5a0,#1a6b8a);color:#fff;box-shadow:0 2px 10px rgba(43,181,160,.35)}
 .badges{display:flex;gap:5px;flex-shrink:0}
-.badge{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;background:rgba(124,106,247,.12);color:var(--accent);border:1px solid rgba(124,106,247,.2);backdrop-filter:blur(4px)}
+.badge{padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;background:rgba(43,181,160,.12);color:var(--accent);border:1px solid rgba(43,181,160,.2);backdrop-filter:blur(4px)}
 
 /* Footer */
-.ftr{display:flex;align-items:center;justify-content:space-between;padding:0 18px;height:28px;background:linear-gradient(90deg,#0f0f1a,#161625);border-top:1px solid rgba(124,106,247,.12);flex-shrink:0;font-size:10px;color:var(--dim)}
+.ftr{display:flex;align-items:center;justify-content:space-between;padding:0 18px;height:28px;background:linear-gradient(90deg,#081420,#0c1e30);border-top:1px solid rgba(43,181,160,.12);flex-shrink:0;font-size:10px;color:var(--dim)}
 .ftr-brand{color:var(--muted);font-weight:600;letter-spacing:.5px}
 .ftr-brand b{color:var(--accent)}
 .ftr-links{display:flex;gap:12px}
@@ -47,7 +48,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:v
 
 /* Layout */
 .layout{display:flex;flex:1;overflow:hidden}
-.lpanel{width:280px;flex-shrink:0;background:linear-gradient(180deg,#161620 0%,#121218 100%);border-right:1px solid rgba(124,106,247,.1);
+.lpanel{width:280px;flex-shrink:0;background:linear-gradient(180deg,#0c1e28 0%,#081420 100%);border-right:1px solid rgba(43,181,160,.1);
   display:flex;flex-direction:column;overflow:hidden}
 .ttabs{display:flex;border-bottom:1px solid var(--border)}
 .tt{flex:1;padding:11px 4px;border:none;background:transparent;color:var(--muted);
@@ -71,15 +72,15 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:v
   background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0;
   position:absolute;inset:0}
 .upzone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
-  width:340px;height:260px;border:2px dashed rgba(124,106,247,.3);border-radius:18px;
-  cursor:pointer;transition:all .3s;position:relative;z-index:1;background:rgba(124,106,247,.03)}
-.upzone:hover{border-color:var(--accent);background:rgba(124,106,247,.08);transform:scale(1.02);box-shadow:0 0 30px rgba(124,106,247,.15)}
+  width:340px;height:260px;border:2px dashed rgba(43,181,160,.3);border-radius:18px;
+  cursor:pointer;transition:all .3s;position:relative;z-index:1;background:rgba(43,181,160,.03)}
+.upzone:hover{border-color:var(--accent);background:rgba(43,181,160,.08);transform:scale(1.02);box-shadow:0 0 30px rgba(43,181,160,.15)}
 .upzone .uic{font-size:42px}
 .upzone p{font-size:14px;font-weight:500}
 .upzone span{font-size:11px;color:var(--muted)}
 .cwrap{position:relative;display:inline-block}
 .ecanvas{max-width:calc(100vw - 302px);max-height:calc(100vh - 96px);display:block;
-  border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 0 1px rgba(124,106,247,.1)}
+  border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 0 1px rgba(43,181,160,.1)}
 .ctbar{position:absolute;bottom:-38px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
 .cbtn{padding:5px 12px;border-radius:5px;border:1px solid var(--border);background:var(--panel);
   color:var(--muted);font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s}
@@ -106,11 +107,11 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:v
 .sl{display:flex;justify-content:space-between;margin-bottom:5px;font-size:11px;color:var(--muted)}
 .sl span:last-child{color:var(--text);font-variant-numeric:tabular-nums}
 input[type=range]{-webkit-appearance:none;width:100%;height:4px;background:var(--border);border-radius:2px;outline:none;cursor:pointer}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 2px rgba(124,106,247,.3)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 2px rgba(43,181,160,.3)}
 .btn{display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 13px;
   border-radius:var(--rs);border:none;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
-.bp{background:linear-gradient(135deg,#7c6af7,#6366f1);color:#fff;box-shadow:0 2px 8px rgba(124,106,247,.3)}
-.bp:hover{background:linear-gradient(135deg,#9b8cfb,#818cf8);box-shadow:0 3px 14px rgba(124,106,247,.45)}
+.bp{background:linear-gradient(135deg,#2bb5a0,#1a6b8a);color:#fff;box-shadow:0 2px 8px rgba(43,181,160,.3)}
+.bp:hover{background:linear-gradient(135deg,#5be5d0,#3cc0a8);box-shadow:0 3px 14px rgba(43,181,160,.45)}
 .bs{background:var(--panel2);color:var(--text);border:1px solid var(--border)}
 .bs:hover{border-color:var(--accent);color:var(--accent)}
 .bd{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2)}
@@ -282,12 +283,12 @@ textarea.tinp{resize:vertical;min-height:70px;line-height:1.5}
 <!-- Loading screen — shown while Babel compiles the app -->
 <div id="boot" style="position:fixed;inset:0;background:#0d0d0d;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:16px;z-index:9999">
-  <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#7c6af7,#a855f7);
+  <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#2bb5a0,#38c9b0);
     display:flex;align-items:center;justify-content:center;font-size:26px">✦</div>
   <div style="color:#e8e8e8;font-size:22px;font-weight:700;letter-spacing:-.3px">
-    Smart <span style="color:#7c6af7">Shield One</span></div>
+    Smart <span style="color:#2bb5a0">Shield One</span></div>
   <div style="width:120px;height:3px;background:#2e2e2e;border-radius:2px;overflow:hidden">
-    <div id="boot-bar" style="height:100%;width:30%;background:#7c6af7;border-radius:2px;
+    <div id="boot-bar" style="height:100%;width:30%;background:#2bb5a0;border-radius:2px;
       animation:boot-anim 1.2s ease-in-out infinite"></div>
   </div>
   <div style="color:#555;font-size:12px">Starting app…</div>
@@ -470,7 +471,7 @@ function FilterPanel({filters,onChange,rotation,onRotate}){
 // ═══════════════════════════════════════════════════════
 // TEXT PANEL (with Tamil keyboard)
 // ═══════════════════════════════════════════════════════
-const COLORS=['#ffffff','#000000','#ef4444','#f97316','#eab308','#22c55e','#3b82f6','#a855f7','#ec4899'];
+const COLORS=['#ffffff','#000000','#ef4444','#f97316','#eab308','#22c55e','#3b82f6','#38c9b0','#ec4899'];
 const FONTS=['system-ui','Arial','Georgia','Courier New','Impact','Trebuchet MS','Verdana'];
 const DEF_T={text:'',size:52,font:'system-ui',color:'#ffffff',bold:true,shadow:true,opacity:1};
 
@@ -742,7 +743,7 @@ function PhotoEditor(){
     {id:'yt_thumb',name:'YT Thumbnail',cat:'YouTube',w:1280,h:720,bg:'linear-gradient(135deg,#cc0000 0%,#8B0000 100%)',label:'16:9'},
     {id:'fb_cover',name:'FB Cover',cat:'Social',w:1200,h:630,bg:'linear-gradient(135deg,#1877f2 0%,#0d47a1 100%)',label:'Cover'},
     {id:'wa_status',name:'WA Status',cat:'Social',w:1080,h:1920,bg:'linear-gradient(180deg,#25D366 0%,#128C7E 100%)',label:'WA'},
-    {id:'biz_promo',name:'Business Promo',cat:'Business',w:1080,h:1080,bg:'linear-gradient(135deg,#1a1a2e 0%,#0f3460 100%)',label:'Biz'},
+    {id:'biz_promo',name:'Business Promo',cat:'Business',w:1080,h:1080,bg:'linear-gradient(135deg,#0f2535 0%,#0f3460 100%)',label:'Biz'},
     {id:'sale',name:'Sale Offer',cat:'Business',w:1080,h:1080,bg:'linear-gradient(135deg,#f7971e 0%,#ffd200 100%)',label:'Sale'},
     {id:'event',name:'Event Poster',cat:'Business',w:1080,h:1350,bg:'linear-gradient(135deg,#2d1b69 0%,#11998e 100%)',label:'4:5'},
     {id:'birthday',name:'Birthday',cat:'Personal',w:1080,h:1080,bg:'linear-gradient(135deg,#f953c6 0%,#b91d73 100%)',label:'Bday'},
@@ -758,7 +759,7 @@ function PhotoEditor(){
     const ctx=canvas.getContext('2d');
     const offscreen=document.createElement('canvas');offscreen.width=tpl.w;offscreen.height=tpl.h;
     const octx=offscreen.getContext('2d');
-    const stops=tpl.bg.match(/#[0-9a-fA-F]{3,6}/g)||['#1a1a2e','#0f3460'];
+    const stops=tpl.bg.match(/#[0-9a-fA-F]{3,6}/g)||['#0f2535','#0f3460'];
     const angle=135*Math.PI/180;
     const grd=octx.createLinearGradient(
       tpl.w/2+Math.cos(angle+Math.PI)*tpl.w*0.7,tpl.h/2+Math.sin(angle+Math.PI)*tpl.h*0.7,
@@ -980,7 +981,7 @@ function VideoEditor(){
             <div className="vctrl">
               <div style={{position:'relative',height:26,background:'var(--panel2)',borderRadius:5,marginBottom:8,overflow:'hidden'}}>
                 <div style={{position:'absolute',top:0,height:'100%',left:`${lp}%`,width:`${wp}%`,
-                  background:'linear-gradient(135deg,rgba(124,106,247,.4),rgba(168,85,247,.4))',border:'2px solid var(--accent)',borderRadius:4}}/>
+                  background:'linear-gradient(135deg,rgba(43,181,160,.4),rgba(168,85,247,.4))',border:'2px solid var(--accent)',borderRadius:4}}/>
                 <div style={{position:'absolute',top:0,bottom:0,left:`${pp*(wp/100)+lp}%`,width:2,background:'#fff',opacity:.8}}/>
               </div>
               <div className="tlbls"><span>{fmtT(ts)}</span><span>Duration: {fmtT(te-ts)}</span><span>{fmtT(te)}</span></div>
@@ -1337,7 +1338,7 @@ function TTSPanel(){
       )}
       {recState==='waiting'&&(
         <div style={{display:'flex',alignItems:'center',gap:10,padding:'9px 12px',
-          background:'rgba(124,106,247,.1)',border:'1px solid var(--accent)',
+          background:'rgba(43,181,160,.1)',border:'1px solid var(--accent)',
           borderRadius:'var(--rs)',marginBottom:9}}>
           <span style={{fontSize:16}}>⏳</span>
           <span style={{fontSize:12,color:'var(--accent)',fontWeight:600}}>Waiting for tab share… select tab &amp; check audio</span>
@@ -1633,12 +1634,37 @@ function AIMode(){
     const fullPrompt=`${eng}, ${AI_STYLES[selStyle]}`;
 
     if(tab==='image'){
-      // ── Pollinations AI — FREE, no token, works locally too ──
-      const seed=Math.floor(Math.random()*99999);
-      const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=1024&height=1024&model=flux&nologo=true&seed=${seed}`;
-      // Use img src directly — no fetch needed, works from file:// too
-      setResult({url,type:'image',prompt:eng});
-      setGenerating(false);setProgress('');
+      // Stable Horde — FREE, no token needed, real AI images
+      setProgress('Submitting to AI…');
+      try{
+        const sub=await fetch('https://stablehorde.net/api/v2/generate/async',{
+          method:'POST',
+          headers:{'Content-Type':'application/json','apikey':'0000000000'},
+          body:JSON.stringify({prompt:fullPrompt,params:{width:512,height:512,steps:15,cfg_scale:7},nsfw:false,trusted_workers:false,slow_workers:true})
+        });
+        if(!sub.ok) throw new Error('AI service busy — try again');
+        const {id}=await sub.json();
+        setProgress('Generating image… (15–60 sec)');
+        let tries=0;
+        while(tries<60){
+          await new Promise(r=>setTimeout(r,3000));
+          const chk=await fetch(`https://stablehorde.net/api/v2/generate/status/${id}`);
+          const data=await chk.json();
+          if(data.faulted) throw new Error('Generation failed — try again');
+          if(data.done && data.generations?.length>0){
+            setResult({url:data.generations[0].img,type:'image',prompt:eng});
+            break;
+          }
+          const w=data.wait_time||0;
+          setProgress(`Generating image… ~${w}s remaining`);
+          tries++;
+        }
+        if(tries>=60) throw new Error('Timeout — AI servers busy, try again');
+      }catch(e){
+        setError(e.message);
+      }finally{
+        setGenerating(false);setProgress('');
+      }
     } else {
       // ── HuggingFace for video (needs token) ──
       if(!hfToken){
@@ -1761,9 +1787,9 @@ function AIMode(){
           {/* Help */}
           <div className="ai-token-help">
             {tab==='image'
-              ?<><b>✨ Powered by Pollinations AI + FLUX</b><br/>
-                  No account · No token · No credit card<br/>
-                  Just type or speak → Generate instantly!</>
+              ?<><b>✨ Powered by Stable Horde AI</b><br/>
+                  100% Free · No account · No token needed<br/>
+                  Type or speak → AI generates your image!</>
               :<><b>Video: Free HuggingFace Token</b><br/>
                   1. huggingface.co → Sign up free<br/>
                   2. Settings → Access Tokens → New token<br/>
@@ -2001,7 +2027,7 @@ function AutomatePanel({bizName,bizType,city}){
   const aiReply=async(comment,i,list,setList)=>{
     const p=`Write a friendly professional reply for a ${bizType} business "${bizName||'our business'}" in ${city}, Tamil Nadu to this comment: "${comment.text.replace(/"/g,"'")}". Keep it 1-2 sentences, warm, no hashtags.`;
     try{
-      const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai&seed=${Date.now()}`);
+      const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-large&seed=${Date.now()}`);
       const txt=await r.text();
       const u=[...list];u[i]={...u[i],reply:txt.trim(),aiDone:true};setList(u);
     }catch{alert('Failed to generate reply');}
@@ -2037,7 +2063,7 @@ function AutomatePanel({bizName,bizType,city}){
       if(!updated[i].aiDone){
         const p=`Friendly professional 1-sentence reply from ${bizName||'our business'} (${bizType}) in ${city} to: "${updated[i].text.replace(/"/g,"'")}". No hashtags.`;
         try{
-          const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai&seed=${i}`);
+          const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-large&seed=${i}`);
           updated[i]={...updated[i],reply:(await r.text()).trim(),aiDone:true};
           setList([...updated]);
         }catch{}
@@ -2183,7 +2209,7 @@ function AutomatePanel({bizName,bizType,city}){
             <div style={{display:'flex',gap:8}}>
               <button className="btn bs" style={{flex:1,fontSize:12}} onClick={async()=>{
                 const p=`Write a short friendly business DM from ${bizName||'our business'} (${bizType}) in ${city}, Tamil Nadu to a potential customer. Introduce and offer value. Under 80 words, warm tone.`;
-                const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai&seed=${Date.now()}`);
+                const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-large&seed=${Date.now()}`);
                 setDmText(await r.text());
               }}>✨ AI Write DM</button>
               <button className="btn bp" style={{flex:2,fontSize:12}} onClick={async()=>{
@@ -2342,7 +2368,7 @@ function GrowMode(){
         :`Write a compelling 250-word Google Business profile description for ${biz}. Include: what we offer, why choose us, location advantage in Tamil Nadu, call to action. Professional tone.`;
     }
     try{
-      const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}?model=openai&seed=${Date.now()}`);
+      const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}?model=openai-large&seed=${Date.now()}`);
       const txt=await r.text();
       setResult(txt.trim());
     }catch{
@@ -2350,13 +2376,28 @@ function GrowMode(){
     }finally{setGenerating(false);}
   };
 
-  const generateThumb=()=>{
+  const generateThumb=async()=>{
     if(!bizName.trim())return;
     setThumbLoading(true);setThumbUrl('');
     const title=thumbTitle.trim()||`${bizName} – Best ${bizType} in ${city}`;
     const imgPrompt=`YouTube thumbnail, bold text "${title}", bright vivid colors, professional, eye-catching, ${bizType} theme, Tamil Nadu India, 16:9 ratio, high quality`;
-    const seed=Math.floor(Math.random()*99999);
-    setThumbUrl(`https://image.pollinations.ai/prompt/${encodeURIComponent(imgPrompt)}?width=1280&height=720&model=flux&nologo=true&seed=${seed}`);
+    try{
+      const sub=await fetch('https://stablehorde.net/api/v2/generate/async',{
+        method:'POST',headers:{'Content-Type':'application/json','apikey':'0000000000'},
+        body:JSON.stringify({prompt:imgPrompt,params:{width:768,height:512,steps:20,cfg_scale:7}})
+      });
+      if(!sub.ok) throw new Error('AI busy');
+      const {id}=await sub.json();
+      let tries=0;
+      while(tries<40){
+        await new Promise(r=>setTimeout(r,3000));
+        const chk=await fetch(`https://stablehorde.net/api/v2/generate/status/${id}`);
+        const data=await chk.json();
+        if(data.done && data.generations?.length>0){setThumbUrl(data.generations[0].img);break;}
+        if(data.faulted) throw new Error('Failed');
+        tries++;
+      }
+    }catch{}finally{setThumbLoading(false);}
   };
 
   const copy=()=>{
@@ -2460,7 +2501,7 @@ function GrowMode(){
             <div style={{textAlign:'center',padding:40,color:'var(--muted)'}}>
               <div style={{fontSize:40,marginBottom:12,animation:'spin 1.5s linear infinite'}}>✨</div>
               <p>AI is generating content for your business…</p>
-              <p style={{fontSize:11,marginTop:6}}>Powered by Pollinations AI · Free</p>
+              <p style={{fontSize:11,marginTop:6}}>Powered by AI · Free</p>
             </div>
           )}
           {!generating&&!result&&(
@@ -2553,7 +2594,7 @@ function App(){
     <div className="app">
       <header className="hdr">
         <div className="logo">
-          <div className="logo-ic">⛡</div>
+          <div className="logo-ic"><svg viewBox="0 0 36 42" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="shg" x1="18" y1="0" x2="18" y2="42" gradientUnits="userSpaceOnUse"><stop stopColor="#3a8ab0"/><stop offset="1" stopColor="#4dd8c4"/></linearGradient></defs><path d="M18 2L3 9v13c0 10 6.5 16 15 19 8.5-3 15-9 15-19V9L18 2z" stroke="url(#shg)" strokeWidth="2.5" fill="none"/><path d="M18 8L8 13v8c0 7 4.5 11.5 10 14 5.5-2.5 10-7 10-14v-8L18 8z" stroke="url(#shg)" strokeWidth="1.5" fill="none" opacity="0.4"/><path d="M23 15c-1-1.5-3-2.5-5-2.5s-4 1.5-4 3.5 2 3 5 4 5 2.5 5 5-2 4-5 4.5-4.5-1-5.5-2.5" stroke="url(#shg)" strokeWidth="2.2" strokeLinecap="round" fill="none"/></svg></div>
           <div className="logo-wrap">
             <div className="logo-tx"><span className="ss">Smart Shield</span> <span className="one">One</span></div>
             <div className="logo-sub">Digital Marketing Platform</div>
@@ -2563,7 +2604,7 @@ function App(){
           <button className={`mt ${mode==='photo'?'on':''}`} onClick={()=>setMode('photo')}>🖼 Photo</button>
           <button className={`mt ${mode==='video'?'on':''}`} onClick={()=>setMode('video')}>🎬 Video</button>
           <button className={`mt ${mode==='audio'?'on':''}`} onClick={()=>setMode('audio')}>🎙 Audio / TTS</button>
-          <button className={`mt ${mode==='ai'?'on':''}`} onClick={()=>setMode('ai')} style={{background:mode==='ai'?'linear-gradient(135deg,#7c6af7,#a855f7)':undefined}}>✨ AI Create</button>
+          <button className={`mt ${mode==='ai'?'on':''}`} onClick={()=>setMode('ai')} style={{background:mode==='ai'?'linear-gradient(135deg,#2bb5a0,#38c9b0)':undefined}}>✨ AI Create</button>
           <button className={`mt ${mode==='grow'?'on':''}`} onClick={()=>setMode('grow')} style={{background:mode==='grow'?'linear-gradient(135deg,#22c55e,#16a34a)':undefined}}>📈 Grow</button>
         </div>
         <div className="badges">
