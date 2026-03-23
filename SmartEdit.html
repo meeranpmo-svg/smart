@@ -1594,7 +1594,6 @@ function AIMode(){
   const [tab,setTab]=useState('image');
   const [prompt,setPrompt]=useState('');
   const [transPrompt,setTransPrompt]=useState('');
-  const [hfToken,setHfToken]=useState(()=>localStorage.getItem('hf_token')||'');
   const [listening,setListening]=useState(false);
   const [voiceLang,setVoiceLang]=useState('en');
   const [generating,setGenerating]=useState(false);
@@ -1602,8 +1601,6 @@ function AIMode(){
   const [error,setError]=useState('');
   const [selStyle,setSelStyle]=useState('Realistic');
   const [progress,setProgress]=useState('');
-
-  const saveToken=(v)=>{ setHfToken(v); localStorage.setItem('hf_token',v); };
 
   const startVoice=()=>{
     const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
@@ -1653,28 +1650,58 @@ function AIMode(){
         setGenerating(false);setProgress('');
       }
     } else {
-      // ── HuggingFace for video (needs token) ──
-      if(!hfToken){
-        setError('AI Video needs a free HuggingFace token — enter it below, or use AI Image (no token needed).');
-        setGenerating(false);setProgress('');return;
-      }
-      setProgress('Generating AI video… (60–120 sec)');
+      // ── Free AI Slideshow Video — 4 Pollinations frames → canvas → WebM ──
       try{
-        const res=await fetch('https://api-inference.huggingface.co/models/damo-vilab/text-to-video-ms-1.7b',{
-          method:'POST',
-          headers:{'Authorization':`Bearer ${hfToken}`,'Content-Type':'application/json'},
-          body:JSON.stringify({inputs:fullPrompt}),
-        });
-        if(!res.ok){
-          if(res.status===503) throw new Error('Model loading — wait 30s and try again.');
-          if(res.status===401) throw new Error('Invalid HuggingFace token.');
-          if(res.status===429) throw new Error('Too many requests — wait a minute.');
-          throw new Error(`API error ${res.status}`);
+        const frames=[];
+        for(let i=0;i<4;i++){
+          setProgress(`Generating frame ${i+1} of 4… (free, no token needed)`);
+          const seed=Math.floor(Math.random()*99999)+i*17777;
+          const imgUrl=`https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=1280&height=720&model=flux&nologo=true&seed=${seed}`;
+          await new Promise((res,rej)=>{
+            const img=new Image();
+            img.crossOrigin='anonymous';
+            img.onload=()=>{frames.push(img);res();};
+            img.onerror=rej;
+            img.src=imgUrl;
+          });
         }
-        const blob=await res.blob();
-        setResult({url:URL.createObjectURL(blob),type:'video',prompt:eng});
+        setProgress('Composing slideshow video…');
+        const canvas=document.createElement('canvas');
+        canvas.width=1280;canvas.height=720;
+        const ctx=canvas.getContext('2d');
+        const mimeType=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?'video/webm;codecs=vp9':'video/webm';
+        const stream=canvas.captureStream(30);
+        const recorder=new MediaRecorder(stream,{mimeType,videoBitsPerSecond:4000000});
+        const chunks=[];
+        recorder.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
+        const videoUrl=await new Promise(resolve=>{
+          recorder.onstop=()=>{
+            const blob=new Blob(chunks,{type:'video/webm'});
+            resolve(URL.createObjectURL(blob));
+          };
+          recorder.start(100);
+          const FRAME_MS=2800;
+          const start=Date.now();
+          const draw=()=>{
+            const elapsed=Date.now()-start;
+            if(elapsed>=frames.length*FRAME_MS){recorder.stop();return;}
+            const fi=Math.floor(elapsed/FRAME_MS)%frames.length;
+            const fp=(elapsed%FRAME_MS)/FRAME_MS;
+            const scale=1+fp*0.06;
+            const ox=(canvas.width*(scale-1))/2;
+            const oy=(canvas.height*(scale-1))/2;
+            ctx.save();
+            ctx.translate(-ox,-oy);
+            ctx.scale(scale,scale);
+            ctx.drawImage(frames[fi],0,0,canvas.width,canvas.height);
+            ctx.restore();
+            requestAnimationFrame(draw);
+          };
+          draw();
+        });
+        setResult({url:videoUrl,type:'video',prompt:eng});
       }catch(e){
-        setError(e.message);
+        setError('Video generation failed: '+e.message);
       }finally{
         setGenerating(false);setProgress('');
       }
@@ -1705,16 +1732,10 @@ function AIMode(){
           </div>
 
           {/* Token — only needed for video */}
-          {tab==='image'
-            ?<div style={{padding:'8px 10px',background:'rgba(34,197,94,.08)',border:'1px solid rgba(34,197,94,.3)',borderRadius:6,fontSize:11,color:'var(--green)',marginBottom:10}}>
-                ✅ AI Image is <b>100% free</b> — no login, no token needed!
-              </div>
-            :<div className="tig">
-                <label>HuggingFace Token <span style={{fontSize:10,color:'var(--muted)'}}>(free — for video)</span></label>
-                <input className="tinp" type="password" placeholder="hf_xxxxxxxxxxxxxxxxxxxx"
-                  value={hfToken} onChange={e=>saveToken(e.target.value)}/>
-              </div>
-          }
+          <div style={{padding:'8px 10px',background:'rgba(34,197,94,.08)',border:'1px solid rgba(34,197,94,.3)',borderRadius:6,fontSize:11,color:'var(--green)',marginBottom:10}}>
+            ✅ {tab==='image'?'AI Image':'AI Video'} is <b>100% free</b> — no login, no token needed!
+            {tab==='video'&&<div style={{marginTop:3,color:'var(--muted)',fontSize:10}}>Generates 4 AI frames → cinematic slideshow (WebM video)</div>}
+          </div>
 
           {/* Voice language */}
           <div className="stitle">Input Language · மொழி</div>
@@ -1751,7 +1772,7 @@ function AIMode(){
           </div>
 
           {/* Style */}
-          <div className="stitle">Image Style</div>
+          <div className="stitle">{tab==='video'?'Video Style':'Image Style'}</div>
           <div style={{display:'flex',flexWrap:'wrap',gap:5,marginBottom:14}}>
             {Object.keys(AI_STYLES).map(s=>(
               <button key={s} className={`style-chip ${selStyle===s?'on':''}`}
@@ -1774,13 +1795,12 @@ function AIMode(){
           {/* Help */}
           <div className="ai-token-help">
             {tab==='image'
-              ?<><b>✨ Powered by Stable Horde AI</b><br/>
+              ?<><b>🖼️ Powered by Pollinations AI (Flux)</b><br/>
                   100% Free · No account · No token needed<br/>
-                  Type or speak → AI generates your image!</>
-              :<><b>Video: Free HuggingFace Token</b><br/>
-                  1. huggingface.co → Sign up free<br/>
-                  2. Settings → Access Tokens → New token<br/>
-                  3. Paste above</>
+                  Type or speak → AI generates your image instantly!</>
+              :<><b>🎬 AI Video — 100% Free, No Token!</b><br/>
+                  Generates 4 unique AI frames → cinematic Ken Burns slideshow → WebM video<br/>
+                  Takes ~20-40 seconds total</>
             }
           </div>
         </div>
