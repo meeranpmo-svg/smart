@@ -1944,6 +1944,28 @@ const FB_TIPS=[
 ];
 
 // ═══════════════════════════════════════════════════════
+// POLLINATIONS RESPONSE CLEANER
+// Strips the deprecation notice Pollinations prepends
+// ═══════════════════════════════════════════════════════
+function cleanPollinations(txt){
+  if(!txt)return '';
+  // Remove the deprecation notice block
+  const lines=txt.split('\n').filter(l=>{
+    const low=l.toLowerCase();
+    return !(
+      low.includes('important notice') ||
+      low.includes('pollinations legacy') ||
+      low.includes('please migrate') ||
+      low.includes('enter.pollinations.ai') ||
+      low.includes('anonymous requests') ||
+      low.includes('being deprecated') ||
+      (low.includes('note:') && low.includes('not affected'))
+    );
+  });
+  return lines.join('\n').replace(/^\s*⚠️[^\n]*\n?/gm,'').trim();
+}
+
+// ═══════════════════════════════════════════════════════
 // AUTOMATE PANEL – Connect Instagram / YouTube / Google
 // ═══════════════════════════════════════════════════════
 function AutomatePanel({bizName,bizType,city}){
@@ -2072,8 +2094,8 @@ function AutomatePanel({bizName,bizType,city}){
     const p=`Write a friendly professional reply for a ${bizType} business "${bizName||'our business'}" in ${city}, Tamil Nadu to this comment: "${comment.text.replace(/"/g,"'")}". Keep it 1-2 sentences, warm, no hashtags.`;
     try{
       const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-fast&seed=${Date.now()}`);
-      const txt=await r.text();
-      const u=[...list];u[i]={...u[i],reply:txt.trim(),aiDone:true};setList(u);
+      const txt=cleanPollinations(await r.text());
+      const u=[...list];u[i]={...u[i],reply:txt,aiDone:true};setList(u);
     }catch{alert('Failed to generate reply');}
   };
 
@@ -2108,7 +2130,7 @@ function AutomatePanel({bizName,bizType,city}){
         const p=`Friendly professional 1-sentence reply from ${bizName||'our business'} (${bizType}) in ${city} to: "${updated[i].text.replace(/"/g,"'")}". No hashtags.`;
         try{
           const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-fast&seed=${i}`);
-          updated[i]={...updated[i],reply:(await r.text()).trim(),aiDone:true};
+          updated[i]={...updated[i],reply:cleanPollinations(await r.text()),aiDone:true};
           setList([...updated]);
         }catch{}
       }
@@ -2254,7 +2276,7 @@ function AutomatePanel({bizName,bizType,city}){
               <button className="btn bs" style={{flex:1,fontSize:12}} onClick={async()=>{
                 const p=`Write a short friendly business DM from ${bizName||'our business'} (${bizType}) in ${city}, Tamil Nadu to a potential customer. Introduce and offer value. Under 80 words, warm tone.`;
                 const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-fast&seed=${Date.now()}`);
-                setDmText(await r.text());
+                setDmText(cleanPollinations(await r.text()));
               }}>✨ AI Write DM</button>
               <button className="btn bp" style={{flex:2,fontSize:12}} onClick={async()=>{
                 if(!dmTo.trim()||!dmText.trim()){alert('Enter recipient and message');return;}
@@ -2423,8 +2445,8 @@ function GrowMode(){
     }
     try{
       const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}?model=openai-fast&seed=${Date.now()}`);
-      const txt=await r.text();
-      setResult(txt.trim());
+      const txt=cleanPollinations(await r.text());
+      setResult(txt||'❌ No content returned. Try again.');
     }catch{
       setResult('❌ Failed to generate. Check internet connection and try again.');
     }finally{setGenerating(false);}
@@ -2436,7 +2458,7 @@ function GrowMode(){
     const p=`Rewrite and improve this social media caption to make it more engaging, add better emojis, stronger call-to-action, and more compelling for Tamil Nadu ${bizType} customers. Keep the core message:\n\n${result.slice(0,800)}`;
     try{
       const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-fast&seed=${Date.now()}`);
-      setResult((await r.text()).trim());
+      setResult(cleanPollinations(await r.text())||result);
     }catch{}finally{setRewriting(false);}
   };
 
@@ -2447,7 +2469,7 @@ function GrowMode(){
     const p=`Create a ${calDays}-day social media content calendar for ${biz}. For each day include: Day number, Platform (Instagram/Facebook/YouTube/WhatsApp), Content Type (Post/Story/Reel/Video/Broadcast), Topic/Title, and a brief caption idea (1 sentence). Format as a clean numbered list. Focus on Tamil Nadu festivals, local events, and business promotions.`;
     try{
       const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-fast&seed=${Date.now()}`);
-      setCalResult((await r.text()).trim());
+      setCalResult(cleanPollinations(await r.text())||'❌ No content returned. Try again.');
     }catch{setCalResult('❌ Failed. Try again.');}
     finally{setCalGenerating(false);}
   };
