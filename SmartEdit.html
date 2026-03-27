@@ -321,6 +321,179 @@ select.tinp option{background:#0d1829;color:#dde8f8}
 /* ── OVERLAY ── */
 .ov{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;
   justify-content:center;z-index:100;flex-direction:column;gap:10px}
+
+/* ═══════════════════════════════════════════
+   GUI ENHANCEMENT LAYER
+   ═══════════════════════════════════════════ */
+
+/* Header — gradient accent line at bottom */
+.hdr{
+  background:linear-gradient(135deg,#fff 0%,#f9f8ff 100%);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 1px 0 rgba(0,0,0,.04),0 4px 20px rgba(79,70,229,.06);
+  position:relative;
+}
+.hdr::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,#4f46e5 0%,#7c3aed 40%,#06b6d4 100%);
+}
+
+/* Sidebar — richer deep gradient */
+.lpanel{
+  background:linear-gradient(180deg,#0b1628 0%,#091422 100%);
+  box-shadow:2px 0 20px rgba(0,0,0,.3);
+}
+
+/* Section titles — colored left indicator */
+.stitle{
+  display:flex;align-items:center;gap:7px;
+  font-size:10px;font-weight:700;color:var(--sidebar-muted);
+  text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px;margin-top:4px;
+}
+.stitle::before{
+  content:'';width:3px;height:10px;border-radius:2px;
+  background:linear-gradient(180deg,#818cf8,#a78bfa);flex-shrink:0;
+}
+.ai-side .stitle{color:var(--muted)}
+.ai-side .stitle::before{background:linear-gradient(180deg,#4f46e5,#7c3aed)}
+
+/* Inputs — glow focus */
+.tinp:focus{
+  border-color:#818cf8;
+  background:rgba(255,255,255,.1);
+  box-shadow:0 0 0 3px rgba(129,140,248,.15);
+}
+.ai-side .tinp:focus{
+  border-color:var(--accent);
+  background:#fff;
+  box-shadow:0 0 0 3px rgba(79,70,229,.12);
+}
+
+/* Primary button — more polished */
+.bp{
+  background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);
+  box-shadow:0 2px 12px rgba(79,70,229,.4),inset 0 1px 0 rgba(255,255,255,.15);
+}
+.bp:hover{
+  background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);
+  box-shadow:0 4px 18px rgba(79,70,229,.5),inset 0 1px 0 rgba(255,255,255,.15);
+  transform:translateY(-1px);
+}
+.bp:active{transform:translateY(0)}
+
+/* Logo enhancement */
+.logo-ic{
+  background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);
+  box-shadow:0 4px 14px rgba(79,70,229,.5),inset 0 1px 0 rgba(255,255,255,.2);
+}
+
+/* Mode tabs - active pill glow */
+.mt.on{
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);
+  box-shadow:0 2px 12px rgba(79,70,229,.4),inset 0 1px 0 rgba(255,255,255,.15);
+}
+
+/* Sidebar tabs — better active */
+.tt.on{
+  color:#a5b4fc;border-bottom-color:#818cf8;
+  background:linear-gradient(180deg,rgba(129,140,248,.12),rgba(129,140,248,.04));
+}
+
+/* Upload zone — gradient bg */
+.upzone{
+  background:radial-gradient(ellipse at center,rgba(79,70,229,.07) 0%,rgba(79,70,229,.02) 60%,transparent 100%);
+  border:2px dashed rgba(79,70,229,.35);
+}
+
+/* ── GROW PLATFORM CARDS ── */
+.plat-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:7px;margin-bottom:12px;
+}
+.plat-card{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:11px 6px 9px;border-radius:10px;
+  border:1.5px solid var(--border);background:var(--panel2);
+  color:var(--muted);cursor:pointer;transition:all .18s;
+  font-size:11px;font-weight:600;text-align:center;font-family:inherit;
+}
+.plat-card .pic{font-size:20px;line-height:1;margin-bottom:1px}
+.plat-card:hover{
+  border-color:rgba(79,70,229,.5);color:var(--accent);
+  background:var(--accent-dim);transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(79,70,229,.12);
+}
+.plat-card.on{
+  border-color:#4f46e5;
+  background:linear-gradient(135deg,#4f46e5,#7c3aed);
+  color:#fff;box-shadow:0 3px 14px rgba(79,70,229,.38);
+  transform:translateY(-2px);
+}
+.plat-card.on-fb{border-color:#1877f2;background:linear-gradient(135deg,#1877f2,#0a5dc2);color:#fff;box-shadow:0 3px 12px rgba(24,119,242,.35);transform:translateY(-2px)}
+.plat-card.on-yt{border-color:#ff0000;background:linear-gradient(135deg,#ff0000,#cc0000);color:#fff;box-shadow:0 3px 12px rgba(255,0,0,.3);transform:translateY(-2px)}
+.plat-card.on-wa{border-color:#25d366;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;box-shadow:0 3px 12px rgba(37,211,102,.35);transform:translateY(-2px)}
+.plat-card.on-ggl{border-color:#4285f4;background:linear-gradient(135deg,#4285f4,#34a853);color:#fff;box-shadow:0 3px 12px rgba(66,133,244,.3);transform:translateY(-2px)}
+.plat-card.on-cal{border-color:#f97316;background:linear-gradient(135deg,#f97316,#ef4444);color:#fff;box-shadow:0 3px 12px rgba(249,115,22,.35);transform:translateY(-2px)}
+
+/* Grow result area */
+.grow-card{
+  background:#fff;border-radius:12px;border:1px solid var(--border);
+  padding:18px;box-shadow:0 2px 12px rgba(0,0,0,.05);
+}
+.grow-card-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);
+}
+.grow-card-title{
+  font-size:13px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:7px;
+}
+.grow-card-title::before{
+  content:'';width:4px;height:14px;border-radius:2px;
+  background:linear-gradient(180deg,#4f46e5,#7c3aed);flex-shrink:0;
+}
+
+/* Better tip boxes */
+.tip{
+  background:linear-gradient(135deg,rgba(129,140,248,.06) 0%,rgba(129,140,248,.03) 100%);
+  border:1px solid rgba(129,140,248,.2);
+  border-left:3px solid #818cf8;
+  border-radius:var(--rs);padding:9px 11px;
+  font-size:12px;color:var(--sidebar-muted);
+  margin-bottom:12px;line-height:1.5;
+}
+
+/* Divider with gradient */
+.div{
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);
+  margin:13px 0;
+}
+
+/* Better filter pills */
+.fp{
+  padding:5px 12px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.05);
+  color:var(--sidebar-muted);font-size:12px;cursor:pointer;transition:all .15s;
+  font-family:inherit;
+}
+.fp:hover,.fp.on{
+  border-color:#818cf8;color:#fff;
+  background:linear-gradient(135deg,rgba(129,140,248,.25),rgba(129,140,248,.15));
+  box-shadow:0 2px 8px rgba(129,140,248,.2);
+}
+
+/* Template cards */
+.tpl-card:hover{
+  border-color:#818cf8;transform:translateY(-3px);
+  box-shadow:0 6px 20px rgba(129,140,248,.25);
+}
+
+/* Scrollbar for pbody */
+.pbody::-webkit-scrollbar{width:5px}
+.pbody::-webkit-scrollbar-track{background:transparent}
+.pbody::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:3px}
+.pbody::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.2)}
 </style>
 </head>
 <body>
@@ -1944,25 +2117,38 @@ const FB_TIPS=[
 ];
 
 // ═══════════════════════════════════════════════════════
-// POLLINATIONS RESPONSE CLEANER
-// Strips the deprecation notice Pollinations prepends
+// POLLINATIONS TEXT HELPER — uses OpenAI-compatible POST API
+// Works from browsers without the legacy deprecation issue
 // ═══════════════════════════════════════════════════════
-function cleanPollinations(txt){
-  if(!txt)return '';
-  // Remove the deprecation notice block
-  const lines=txt.split('\n').filter(l=>{
-    const low=l.toLowerCase();
-    return !(
-      low.includes('important notice') ||
-      low.includes('pollinations legacy') ||
-      low.includes('please migrate') ||
-      low.includes('enter.pollinations.ai') ||
-      low.includes('anonymous requests') ||
-      low.includes('being deprecated') ||
-      (low.includes('note:') && low.includes('not affected'))
+async function pollText(prompt){
+  const seed=Math.floor(Math.random()*99999);
+  // 1. Try POST (OpenAI-compatible, new API)
+  try{
+    const r=await fetch('https://text.pollinations.ai/openai',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      referrerPolicy:'no-referrer',
+      body:JSON.stringify({model:'openai',messages:[{role:'user',content:prompt}],seed})
+    });
+    if(r.ok){
+      const d=await r.json();
+      const txt=(d.choices?.[0]?.message?.content||'').trim();
+      if(txt) return txt;
+    }
+  }catch{}
+  // 2. Fallback: legacy GET with no-referrer (prevents deprecation notice)
+  try{
+    const r=await fetch(
+      `https://text.pollinations.ai/${encodeURIComponent(prompt)}?model=openai&seed=${seed}`,
+      {referrerPolicy:'no-referrer'}
     );
-  });
-  return lines.join('\n').replace(/^\s*⚠️[^\n]*\n?/gm,'').trim();
+    if(r.ok){
+      const raw=(await r.text()).trim();
+      // Strip deprecation notice if present
+      return raw.replace(/⚠️\s*\*\*IMPORTANT NOTICE\*\*[\s\S]*?NOT affected\.\s*/i,'').trim();
+    }
+  }catch{}
+  return '';
 }
 
 // ═══════════════════════════════════════════════════════
@@ -2093,8 +2279,7 @@ function AutomatePanel({bizName,bizType,city}){
   const aiReply=async(comment,i,list,setList)=>{
     const p=`Write a friendly professional reply for a ${bizType} business "${bizName||'our business'}" in ${city}, Tamil Nadu to this comment: "${comment.text.replace(/"/g,"'")}". Keep it 1-2 sentences, warm, no hashtags.`;
     try{
-      const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-fast&seed=${Date.now()}`);
-      const txt=cleanPollinations(await r.text());
+      const txt=await pollText(p);
       const u=[...list];u[i]={...u[i],reply:txt,aiDone:true};setList(u);
     }catch{alert('Failed to generate reply');}
   };
@@ -2129,8 +2314,7 @@ function AutomatePanel({bizName,bizType,city}){
       if(!updated[i].aiDone){
         const p=`Friendly professional 1-sentence reply from ${bizName||'our business'} (${bizType}) in ${city} to: "${updated[i].text.replace(/"/g,"'")}". No hashtags.`;
         try{
-          const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-fast&seed=${i}`);
-          updated[i]={...updated[i],reply:cleanPollinations(await r.text()),aiDone:true};
+          updated[i]={...updated[i],reply:await pollText(p),aiDone:true};
           setList([...updated]);
         }catch{}
       }
@@ -2275,8 +2459,7 @@ function AutomatePanel({bizName,bizType,city}){
             <div style={{display:'flex',gap:8}}>
               <button className="btn bs" style={{flex:1,fontSize:12}} onClick={async()=>{
                 const p=`Write a short friendly business DM from ${bizName||'our business'} (${bizType}) in ${city}, Tamil Nadu to a potential customer. Introduce and offer value. Under 80 words, warm tone.`;
-                const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-fast&seed=${Date.now()}`);
-                setDmText(cleanPollinations(await r.text()));
+                setDmText(await pollText(p));
               }}>✨ AI Write DM</button>
               <button className="btn bp" style={{flex:2,fontSize:12}} onClick={async()=>{
                 if(!dmTo.trim()||!dmText.trim()){alert('Enter recipient and message');return;}
@@ -2444,8 +2627,7 @@ function GrowMode(){
         :`Write a compelling 250-word Google Business profile description for ${biz}. Include: what we offer, why choose us, location advantage in Tamil Nadu, call to action. Professional tone.`;
     }
     try{
-      const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}?model=openai-fast&seed=${Date.now()}`);
-      const txt=cleanPollinations(await r.text());
+      const txt=await pollText(prompt);
       setResult(txt||'❌ No content returned. Try again.');
     }catch{
       setResult('❌ Failed to generate. Check internet connection and try again.');
@@ -2457,8 +2639,7 @@ function GrowMode(){
     setRewriting(true);
     const p=`Rewrite and improve this social media caption to make it more engaging, add better emojis, stronger call-to-action, and more compelling for Tamil Nadu ${bizType} customers. Keep the core message:\n\n${result.slice(0,800)}`;
     try{
-      const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-fast&seed=${Date.now()}`);
-      setResult(cleanPollinations(await r.text())||result);
+      setResult(await pollText(p)||result);
     }catch{}finally{setRewriting(false);}
   };
 
@@ -2468,8 +2649,7 @@ function GrowMode(){
     const biz=`${bizName} (${bizType}) in ${city}, Tamil Nadu, India`;
     const p=`Create a ${calDays}-day social media content calendar for ${biz}. For each day include: Day number, Platform (Instagram/Facebook/YouTube/WhatsApp), Content Type (Post/Story/Reel/Video/Broadcast), Topic/Title, and a brief caption idea (1 sentence). Format as a clean numbered list. Focus on Tamil Nadu festivals, local events, and business promotions.`;
     try{
-      const r=await fetch(`https://text.pollinations.ai/${encodeURIComponent(p)}?model=openai-fast&seed=${Date.now()}`);
-      setCalResult(cleanPollinations(await r.text())||'❌ No content returned. Try again.');
+      setCalResult(await pollText(p)||'❌ No content returned. Try again.');
     }catch{setCalResult('❌ Failed. Try again.');}
     finally{setCalGenerating(false);}
   };
@@ -2513,17 +2693,17 @@ function GrowMode(){
     <div className="ai-wrap">
       <div className="ai-side" style={{width:340}}>
         <div className="pbody">
-          {/* Platform tabs */}
+          {/* Platform cards */}
           <div className="stitle">Platform</div>
-          <div style={{display:'flex',gap:5,marginBottom:14,flexWrap:'wrap'}}>
-            <button className={`btn ${tab==='instagram'?'bp':'bs'}`} style={{flex:1,fontSize:11}} onClick={()=>setTab('instagram')}>📸 Instagram</button>
-            <button className={`btn ${tab==='facebook'?'bp':'bs'}`} style={{flex:1,fontSize:11,background:tab==='facebook'?'#1877f2':undefined,borderColor:tab==='facebook'?'#1877f2':undefined}} onClick={()=>setTab('facebook')}>📘 Facebook</button>
-            <button className={`btn ${tab==='youtube'?'bp':'bs'}`} style={{flex:1,fontSize:11}} onClick={()=>setTab('youtube')}>▶️ YouTube</button>
-            <button className={`btn ${tab==='google'?'bp':'bs'}`} style={{flex:1,fontSize:11}} onClick={()=>setTab('google')}>🗺 Google</button>
-            <button className={`btn ${tab==='whatsapp'?'bp':'bs'}`} style={{flex:1,fontSize:11,background:tab==='whatsapp'?'#25D366':undefined,borderColor:tab==='whatsapp'?'#25D366':undefined}} onClick={()=>setTab('whatsapp')}>💬 WhatsApp</button>
-            <button className={`btn ${tab==='calendar'?'bp':'bs'}`} style={{flex:1,fontSize:11,background:tab==='calendar'?'linear-gradient(135deg,#f97316,#ef4444)':undefined}} onClick={()=>setTab('calendar')}>📅 Calendar</button>
-            <button className={`btn ${tab==='automate'?'bp':'bs'}`} style={{width:'100%',fontSize:11,marginTop:2}} onClick={()=>setTab('automate')}>🤖 Connect & Automate</button>
+          <div className="plat-grid">
+            <button className={`plat-card ${tab==='instagram'?'on':''}`} onClick={()=>setTab('instagram')}><span className="pic">📸</span>Instagram</button>
+            <button className={`plat-card ${tab==='facebook'?'on-fb':''}`} onClick={()=>setTab('facebook')}><span className="pic">📘</span>Facebook</button>
+            <button className={`plat-card ${tab==='youtube'?'on-yt':''}`} onClick={()=>setTab('youtube')}><span className="pic">▶️</span>YouTube</button>
+            <button className={`plat-card ${tab==='google'?'on-ggl':''}`} onClick={()=>setTab('google')}><span className="pic">🗺</span>Google</button>
+            <button className={`plat-card ${tab==='whatsapp'?'on-wa':''}`} onClick={()=>setTab('whatsapp')}><span className="pic">💬</span>WhatsApp</button>
+            <button className={`plat-card ${tab==='calendar'?'on-cal':''}`} onClick={()=>setTab('calendar')}><span className="pic">📅</span>Calendar</button>
           </div>
+          <button className={`btn ${tab==='automate'?'bp':'bs'} bfw`} style={{marginBottom:14,fontSize:12}} onClick={()=>setTab('automate')}>🤖 Connect &amp; Automate</button>
 
           {/* Business info */}
           <div className="stitle">Your Business Info</div>
